@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if method == "add_to_cart" %}
+<div class="container my-5">
+    <div class="card shadow p-4 border-0">
+        <div class="text-center">
+            <div class="text-success display-4 mb-3">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <h2 class="text-success">Item(s) Successfully Added to Cart!</h2>
+            <p class="lead">Here’s what you’ve added:</p>
+        </div>
+
+        {% if cart %}
+        <div class="row mt-4">
+            {% for item in cart %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="{{ item.laptop.image.url }}" class="img-fluid rounded-start" alt="{{ item.laptop.name }}">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.laptop.name }}</h5>
+                                <p class="card-text text-muted">{{ item.laptop.desc }}</p>
+                                <p class="card-text"><strong>Price:</strong> Rs. {{ item.laptop.price }}</p>
+                                <p class="card-text"><strong>Quantity:</strong> {{ item.quantity }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-muted">Your cart is empty.</p>
+        {% endif %}
+
+        <div class="d-grid gap-2 col-md-6 mx-auto mt-4">
+            <a href="{% url 'checkout' %}" class="btn btn-primary btn-lg">Confirm Order</a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container mt-5">
+    <div class="card shadow p-4 border-0">
+        <div class="text-center">
+            <div class="text-success display-4 mb-3">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <h2 class="text-success">Item(s) Ready for Checkout!</h2>
+            <p class="lead">Review your items and confirm delivery details:</p>
+        </div>
+
+        {% if cart %}
+        <div class="row mt-4">
+            {% for item in cart %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="{{ item.laptop.image.url }}" class="img-fluid rounded-start" alt="{{ item.laptop.name }}">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.laptop.name }}</h5>
+                                <p class="card-text text-muted">{{ item.laptop.desc }}</p>
+                                <p class="card-text"><strong>Price:</strong> Rs. {{ item.laptop.price }}</p>
+                                <p class="card-text"><strong>Quantity:</strong> {{ item.quantity }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-muted">Your cart is empty.</p>
+        {% endif %}
+
+        <hr class="my-4">
+
+        <div class="mt-3">
+            <h5>Delivery Details:</h5>
+            <p><strong>Name:</strong> {{ customer.name }}</p>
+            <p><strong>Email:</strong> {{ customer.emailaddress }}</p>
+            <p><strong>Address:</strong> {{ customer.address }}</p>
+            <p><strong>Pincode:</strong> {{ customer.pincode }}</p>
+        </div>
+
+        <div class="d-grid gap-2 col-md-6 mx-auto mt-4">
+            <form action="{% url 'checkout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-lg">Confirm Order</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock %}

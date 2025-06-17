@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% include "head.html" %}
+
+<body class="bg-light">
+    <div class="container-fluid p-0">
+        {% include "navbar.html" %}
+        <div class="container-fluid bg-secondary py-5 mb-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center text-white">
+                    <h1 class="display-4 fw-bold">Get in Touch!</h1>
+                    <p class="lead">We'd love to hear from you. Fill out the form below with your inquiries or feedback.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-lg border-0 rounded-lg p-4">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4">Send Us a Message</h2>
+                           <form id="contactForm" method="POST" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="inputName" class="form-label fw-bold">Name*</label>
+        <input type="text" name="name" class="form-control rounded-pill" id="inputName" required>
+        <div class="invalid-feedback">Please enter your name.</div>
+    </div>
+    <div class="mb-3">
+        <label for="inputEmail" class="form-label fw-bold">Email Address*</label>
+        <input type="email" name="email" class="form-control rounded-pill" id="inputEmail" required>
+        <div class="invalid-feedback">Please enter a valid email address.</div>
+    </div>
+    <div class="mb-3">
+        <label for="inputText" class="form-label fw-bold">Message*</label>
+        <textarea name="message" class="form-control rounded" id="inputText" rows="5" required></textarea>
+        <div class="invalid-feedback">Please enter your message.</div>
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold">Send Message</button>
+    </div>
+</form>
+
+{% if error %}
+    <div class="alert alert-danger mt-3">{{ error }}</div>
+{% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include "footer.html" %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Basic form validation (you might want more robust client-side validation)
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        });
+    </script>
+
+    <style>
+        /* Additional Custom Styling */
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, .5);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .invalid-feedback {
+            font-size: 0.9rem;
+            color: #dc3545;
+        }
+
+        /* Responsive Text */
+        .display-4 {
+            font-size: 3rem;
+        }
+
+        .lead {
+            font-size: 1.25rem;
+        }
+
+        /* Card Customizations */
+        .card {
+            border-radius: 20px;
+        }
+
+        /* Add space between fields */
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</body>
+</html>
