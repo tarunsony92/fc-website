@@ -46,28 +46,40 @@ def aboutus (request):
 
 
 def register(request):
-    if request.method == 'POST':
-        print("Form submitted!")
+    if request.method == "POST":
         err = None
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        passwd = request.POST.get('password')
-        addr = request.POST.get('address')
-        pin = request.POST.get('pincode')
-        phone = request.POST.get('phone')
-        gen = request.POST.get('gender')
+        name     = request.POST.get("name", "").strip()
+        email    = request.POST.get("email", "").strip().lower()
+        passwd   = request.POST.get("password", "")
+        addr     = request.POST.get("address", "")
+        pin      = request.POST.get("pincode", "")
+        phone    = request.POST.get("phone", "")
+        gen      = request.POST.get("gender", "")
 
-        print("Data:", name, email, passwd, addr, pin, phone, gen)
-
+        # Preserve entered values to refill the form on error
         values = {
-            'name': name,
-            'email': email,
-            'addr': addr,
-            'pin': pin,
-            'phone': phone,
-            'gen': gen,
+            "name": name,
+            "email": email,
+            "addr": addr,
+            "pin": pin,
+            "phone": phone,
+            "gen": gen,
         }
 
+        # ---------- Validation ----------
+        if not name.replace(" ", "").isalpha():
+            err = "Invalid Name"
+        elif not phone.isnumeric() or len(phone) != 10:
+            err = "Invalid Phone Number"
+        elif not pin.isnumeric():
+            err = "Invalid Pincode"
+        elif Customer.objects.filter(emailaddress=email).exists():
+            err = "Email already registered"
+
+        if err:
+            return render(request, "register.html", {"err": err, "values": values})
+
+        # ---------- Create Customer ----------
         customer = Customer(
             name=name,
             gender=gen,
@@ -77,36 +89,32 @@ def register(request):
             emailaddress=email,
             password=passwd
         )
-
-        if not name.replace(" ", "").isalpha():
-            err = "Invalid Name"
-            print("Error:", err)
-        elif not phone.isnumeric() or len(phone) != 10:
-            err = "Invalid Phone"
-            print("Error:", err)
-        elif not pin.isnumeric():
-            err = "Invalid Pincode"
-            print("Error:", err)
-        elif customer.is_exists():
-            err = "Email already exists"
-            print("Error:", err)
-
-        if err:
-            print("Rendering register page with error.")
-            return render(request, 'register.html', {'err': err, 'values': values})
-
-        # Saving data
         customer.save()
-        print("Customer saved to DB")
 
-        if not User.objects.filter(username=email).exists():
-            myuser = User.objects.create_user(username=email, email=email, password=passwd)
-            myuser.save()
-            print("User also created in auth_user")
+        # ---------- Create / Ensure Django auth user ----------
+        user, created = User.objects.get_or_create(username=email, defaults={
+            "email": email,
+            "first_name": name.split()[0],
+        })
+        if created:
+            user.set_password(passwd)
+            user.save()
 
-        return render(request, 'login.html', {'err': "You are registered! Try logging in."})
+        # ---------- Auto‑login ----------
+        user = authenticate(request, username=email, password=passwd)
+        if user:
+            login(request, user)
+            return redirect("user")          # ⬅️  replace "user" with your dashboard URL‑name
 
-    return render(request, 'register.html')
+        # Fallback (should rarely happen)
+        return redirect("login")
+
+    # GET request ⇒ show form
+    return render(request, "register.html")
+
+
+
+
 def signin(request):
     if request.method == 'POST':
         email = request.POST.get('email')

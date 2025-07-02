@@ -1,54 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static%}
+{% load static %}
 {% include "head.html" %}
 
 <body class="color">
-<div class="container-fluid">
-    <!--outer start-->
+    <div class="container-fluid px-0">
+        <!-- Navbar -->
+        {% include "navbar.html" %}
 
-    <!--heading start-->
-
-    <div class="container-fluid">
-
-        <!--navbar start-->
-        {%include "navbar.html" %}
-
-        <!--navbar end-->
-
-        <div class="row">
-            <div class="col-sm-8">
-                <img src="{% static 'images/aboutus.jpg' %}" height="250" width="1000">
-            </div>
-            <div class="col-sm-4">
-                <img src="{% static 'images/aboutus1.jpg' %}" height="250" width="470">
+        <!-- Hero Section -->
+        <div class="position-relative text-white text-center" style="margin-top: 5px;">
+            <img src="{% static 'images/aboutus.jpg' %}" class="img-fluid w-100" style="height: 400px; object-fit: cover;">
+            <div class="position-absolute top-50 start-50 translate-middle">
+                <h1 class="display-4 fw-bold shadow-lg">About Us</h1>
+                <p class="lead">Your one-stop destination for the best laptops</p>
             </div>
         </div>
 
+        <!-- Mission & Vision -->
+        <div class="container my-5">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4">
+                    <h2>Our Mission</h2>
+                    <p>To provide cutting-edge laptops and unmatched support to every tech lover, student, and professional across the country.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h2>Our Vision</h2>
+                    <p>To become India's most trusted online destination for high-quality laptops and accessories by blending technology and trust.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Highlights -->
+        <div class="bg-light py-5">
+            <div class="container text-center">
+                <div class="row g-4">
+                    <div class="col-sm">
+                        <h3>10,000+</h3>
+                        <p>Happy Customers</p>
+                    </div>
+                    <div class="col-sm">
+                        <h3>500+</h3>
+                        <p>Verified Products</p>
+                    </div>
+                    <div class="col-sm">
+                        <h3>24x7</h3>
+                        <p>Customer Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Showcase -->
+        <div class="container my-5">
+            <h2 class="text-center mb-4">Meet Our Team</h2>
+            <div class="row text-center g-4">
+                <div class="col-md-4">
+                    <img src="{% static 'images/team1.jpg' %}" class="rounded-circle shadow" width="150" height="150" alt="">
+                    <h5 class="mt-3">Tarun Soni</h5>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="{% static 'images/team2.jpg' %}" class="rounded-circle shadow" width="150" height="150" alt="">
+                    <h5 class="mt-3">Riya Kapoor</h5>
+                    <p>Marketing Lead</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="{% static 'images/team3.jpg' %}" class="rounded-circle shadow" width="150" height="150" alt="">
+                    <h5 class="mt-3">Aman Verma</h5>
+                    <p>Tech Lead</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="bg-warning py-5 text-center text-dark">
+            <h2 class="mb-3">Ready to shop your dream laptop?</h2>
+            <a href="/laptop/" class="btn btn-dark btn-lg">Explore Now</a>
+        </div>
+
+        <!-- Footer -->
+        {% include "footer.html" %}
     </div>
-
-    <!--heading end-->
-    <div class="row mt-5">
-        <div class="col-sm-3">
-            <img src="{% static 'images/about.jpg' %}" height="250" width="250">
-        </div>
-        <div class="col-sm-3">
-            <img src="{% static 'images/8.jpg' %}" height="250" width="250">
-        </div>
-        <div class="col-sm-3">
-            <img src="{% static 'images/9.jpg' %}" height="250" width="250">
-        </div>
-        <div class="col-sm-3">
-            <img src="{% static 'images/10.png' %}" height="250" width="250">
-        </div>
-    </div>
-
-    <!--footer start-->
-    {% include "footer.html"%}
-    <!-- footer end -->
-
-
-    <!--outer end-->
-</div>
 </body>
 </html>

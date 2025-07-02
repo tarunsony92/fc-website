@@ -6,81 +6,84 @@
 <body class="color">
     <div class="container-fluid p-0 vh-100 d-flex flex-column">
         {% include "navbar.html" %}
-        <div class="container py-5 flex-grow-1">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-12">
-                    <div class="row justify-content-center mb-4">
-                        <div class="col-12">
-                            <img src="{% static 'images/email.jpg' %}" class="img-fluid rounded shadow-sm w-100" alt="Email Support Illustration" style="max-height: 250px;">
-                        </div>
+
+        <!-- Image directly under navbar -->
+        <div class="w-100">
+            <img src="{% static 'images/email.jpg' %}" class="img-fluid w-100 shadow-sm" alt="Email Support" style="max-height: 250px; margin-top: 3px;">
+        </div>
+
+        <!-- Content Section -->
+        <div class="container py-4 flex-grow-1">
+            <div class="row justify-content-center h-100 align-items-start">
+                <div class="col-md-12 text-center">
+                    <h1 class="mb-3 fw-bold text-primary">Need Email Support?</h1>
+                    <p class="lead mb-4">We're here to help! Send us an email with your questions, feedback, or issues, and our dedicated support team will get back to you as soon as possible.</p>
+
+                    <div class="alert alert-info mb-4" role="alert">
+                        <i class="fas fa-envelope me-2"></i> For prompt assistance, please email us at:
+                        <h2>
+                            <a href="mailto:email@gmail.com" class="text-decoration-none text-success fw-bold" target="_blank" rel="noopener noreferrer">email@gmail.com</a>
+                        </h2>
                     </div>
 
-                    <div class="text-center">
-                        <h1 class="mb-3 fw-bold text-primary">Need Email Support?</h1>
-                        <p class="lead mb-4">We're here to help! Send us an email with your questions, feedback, or issues, and our dedicated support team will get back to you as soon as possible.</p>
+                    <p class="mt-3">
+                        <i class="fas fa-clock me-2"></i> Our typical response time is within 24–48 hours during business days.
+                    </p>
+                    <p>
+                        <i class="fas fa-info-circle me-2"></i> Please provide as much detail as possible in your email to help us assist you effectively.
+                    </p>
 
-                        <div class="alert alert-info mb-4" role="alert">
-                            <i class="fas fa-envelope me-2"></i> For prompt assistance, please email us at:
-                            <h2>
-                                <a href="mailto:email@gamil.com" class="text-decoration-none text-success fw-bold" target="_blank" rel="noopener noreferrer">email@gamil.com</a>
-                            </h2>
-                        </div>
-
-                        <p class="mt-3">
-                            <i class="fas fa-clock me-2"></i> Our typical response time is within 24-48 hours during business days.
-                        </p>
-                        <p>
-                            <i class="fas fa-info-circle me-2"></i> Please provide as much detail as possible in your email to help us assist you effectively.
-                        </p>
-
-                        <div class="mt-5">
-                            <h3>Frequently Asked Questions (FAQ)</h3>
-                            <div class="accordion" id="faqAccordion">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            What kind of issues can I email you about?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            You can email us about any questions regarding our products, services, account issues, technical difficulties, or general feedback.
-                                        </div>
+                    <!-- FAQ Section -->
+                    <div class="mt-5 text-start">
+                        <h3 class="text-center">Frequently Asked Questions (FAQ)</h3>
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        What kind of issues can I email you about?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You can email us about questions regarding our products, services, account issues, technical difficulties, or general feedback.
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingTwo">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            What information should I include in my email?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            Please include your name, relevant order numbers or account details, a clear description of your issue, and any screenshots or attachments that might be helpful.
-                                        </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        What information should I include in my email?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Include your name, order/account details, a clear description of the issue, and any relevant screenshots or files.
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingThree">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            What if my issue is urgent?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            For urgent matters, please consider contacting our phone support (if available - you can add a link or information here) during our business hours. Email is best for non-critical issues.
-                                        </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        What if my issue is urgent?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        For urgent cases, contact our phone support during business hours (if available). Email is best for non-critical issues.
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- End FAQ -->
                 </div>
             </div>
         </div>
+
         {% include "footer.html" %}
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>

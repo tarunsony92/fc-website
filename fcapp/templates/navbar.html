@@ -1,115 +1,123 @@
-{% load static%}
+{% load static %}
 
-<!-- headline start -->
-<div class="row bg-secondary pt-2">
-    <div class="col-sm-3 pt-2"><i class="fa-solid fa-phone"></i> Call Us: +91 8115451542</div>
-    <div class="col-sm-3 pt-2"><i class="fa-solid fa-envelope"></i> Mail Us: email@gmail.com</div>
-    <div class="col-sm-6 text-end">
-        <!-- ====social media icons==== -->
-        <ul class="smi">
-            <li><i class="fa-brands fa-facebook-f"></i></li>
-            <li><i class="fa-brands fa-instagram"></i></li>
-            <li><i class="fa-brands fa-twitter"></i></li>
-            <li><i class="fa-brands fa-google"></i></li>
-        </ul>
-    </div>
-</div>
-<!-- headline end -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+  <div class="container-fluid">
 
+    <!-- Logo -->
+    <a class="navbar-brand " href="{% url 'index' %}">
+      <img src="{% static 'images/download.png' %}" alt="Logo" width="150" height="40">
+    </a>
 
-<div class="row">
+    <!-- Search Form -->
+<form class="d-flex me-2 ms-lg-5 my-2 my-lg-0 position-relative" method="GET" action="{% url 'index' %}" style="max-width: 250px;">
+  <input class="form-control pe-5" type="search" name="q" placeholder="Search" aria-label="Search">
 
-    <nav class="navbar navbar-dark bg-primary mt-1 p-2">
-        <div class="col-sm-2">
-            <nav class="navbar ">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="{% url 'index' %}">
-                        <img src="{% static 'images/download.png' %}" alt="" width="200" height="40" class="d-inline-block align-text-top" style="...">
-                    </a>
-                </div>
-            </nav>
-        </div>
-        <div class="col-sm-3">
-            <nav class="navbar p-1 ">
-                <div class="container-fluid">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success bg-light" type="submit"><a href="{% url 'index' %}" style="color:red; text-decoration:none; " >Search</a></button>
-                    </form>
-                </div>
-            </nav>
-        </div>
-        <div class="col-sm-7">
-
-            <ul class="nav justify-content-start bg-light">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{%url 'index' %}"> <i class="fa-solid fa-house"></i> HOME</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'laptop' %}"><i class="fa-solid fa-laptop"></i> LAPTOPS</a>
-                </li>
-                
-
-
-{% if user.is_authenticated %}
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'user' %}"><i class="fa-solid fa-gear"></i>My Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right"></i>Logout</a>
-                        </li>
-                        
-                        {% else %}
-                
-
-                        <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> LOGIN</a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'emailid' %}"><i class="fa-solid fa-at"></i>EMAIL ID</a>
-                </li>
-
-
-                        {% endif %}
+  <button type="submit" class="btn position-absolute end-0 top-0 mt-1 me-1 p-0 border-0 bg-transparent text-muted">
+    <i class="fas fa-search"></i>
+  </button>
+</form>
 
 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contactus' %}"> <i class="fa-solid fa-address-book"></i> CONTACT US</a>
-                </li>
+    <!-- Toggler Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'aboutus' %}"> <i class="fa-light fa-address-card"></i> ABOUT US</a>
-                </li>
-                {% if not user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="https://fc-website-ni2h.onrender.com/admin/"> <i class="fa-light fa-address-card"></i> ADMIN PANEL</a>
-                </li>
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/' %}fw-bold text-white{% else %}text-light{% endif %}" href="{% url 'index' %}">
+            <i class="fa-solid fa-house"></i> HOME
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/laptop/' %}fw-bold text-white{% else %}text-light{% endif %}" href="{% url 'laptop' %}">
+            <i class="fa-solid fa-laptop"></i> LAPTOPS
+          </a>
+        </li>
+
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/user/' %}fw-bold text-white{% else %}text-light{% endif %}" href="{% url 'user' %}">
+              <i class="fa-solid fa-gear"></i> MY ACCOUNT
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'logout' %}">
+              <i class="fa-solid fa-arrow-right"></i> LOGOUT
+            </a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/login/' %}fw-bold text-white{% else %}text-light{% endif %}" href="{% url 'login' %}">
+              <i class="fa-solid fa-right-to-bracket"></i> LOGIN
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/emailid/' %}fw-bold text-white{% else %}text-light{% endif %}" href="{% url 'emailid' %}">
+              <i class="fa-solid fa-at"></i> EMAIL ID
+            </a>
+          </li>
+        {% endif %}
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/contactus/' %}fw-bold text-white{% else %}text-light{% endif %}" href="{% url 'contactus' %}">
+            <i class="fa-solid fa-address-book"></i> CONTACT US
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/aboutus/' %}fw-bold text-white{% else %}text-light{% endif %}" href="{% url 'aboutus' %}">
+            <i class="fa-regular fa-address-card"></i> ABOUT US
+          </a>
+        </li>
+
+        {% if not user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="https://fc-website-ni2h.onrender.com/admin/">
+              <i class="fa-regular fa-address-card"></i> ADMIN PANEL
+            </a>
+          </li>
+        {% endif %}
+
+        <!-- Cart Button (inside collapse) for Mobile -->
+        {% if user.is_authenticated %}
+          <li class="nav-item d-lg-none">
+            <form action="{% url 'mycart' %}" class="d-flex mt-2">
+              <button type="submit" class="btn btn-dark position-relative w-100">
+                <i class="fa fa-shopping-cart"></i> MY CART
+                {% if request.session.cart > 0 %}
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ request.session.cart }}
+                    <span class="visually-hidden">items in cart</span>
+                  </span>
                 {% endif %}
-                
-                <li class="nav-item">
-                     {% if user.is_authenticated %}
-                        <form action="{% url 'mycart' %}">
-                    <button type="submit" class="btn btn-dark position-relative">
-                        <i class="fa fa-shopping-cart large" aria-hidden="true"> MY CART</i>
-                         {% if request.session.cart > 0 %}
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{request.session.cart}}
-    <span class="visually-hidden">unread messages</span>
-                            {% endif %}
+              </button>
+            </form>
+          </li>
+        {% endif %}
 
-  </span>
-                    </button>
-                        </form>
-                        {% endif %}
+      </ul>
 
-                </li>
-
-            </ul>
-
-        </div>
-    </nav>
-</div>
-
-
+      <!-- Cart Button (desktop only) -->
+      {% if user.is_authenticated %}
+        <form action="{% url 'mycart' %}" class="d-none d-lg-flex ms-lg-3">
+          <button type="submit" class="btn btn-dark position-relative">
+            <i class="fa fa-shopping-cart"></i> MY CART
+            {% if request.session.cart > 0 %}
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ request.session.cart }}
+                <span class="visually-hidden">items in cart</span>
+              </span>
+            {% endif %}
+          </button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</nav>
